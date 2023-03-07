@@ -172,6 +172,7 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
                     if(EmployeesDao.removeEmp(empId))
                        JOptionPane.showMessageDialog(null,"Employee Removed Successfully","SuccessFully",JOptionPane.INFORMATION_MESSAGE);
                     //model = (DefaultTableModel)jTable.getModel();
+                    //comment
                     model.setRowCount(0);
                     loadData();
                     return;
