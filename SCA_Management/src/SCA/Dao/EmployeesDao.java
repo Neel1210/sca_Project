@@ -104,14 +104,13 @@ public class EmployeesDao {
         return empList;
     }
    
-   public static ArrayList<Employees> getEmpDetailById(String empId) throws SQLException
+   public static Employees getEmpDetailById(String empId) throws SQLException
     {
         Connection conn = DBConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("Select * from employees where emp_id=?");
         ps.setString(1, empId);
         ResultSet rs = ps.executeQuery();
-        ArrayList<Employees> empList = new ArrayList<>();
-        while(rs.next())
+        if(rs.next())
         {
             Employees emp = new Employees();
             emp.setEmp_id(rs.getString(1));
@@ -133,9 +132,9 @@ public class EmployeesDao {
             emp.setStatus(rs.getString(14));
             emp.setPan_card(rs.getString(15));
             emp.setSalary(rs.getInt(16));
-            empList.add(emp);
+            return emp;
         }
-        return empList;
+        return null;
     }
    
    public static boolean removeEmp(String empId) throws SQLException

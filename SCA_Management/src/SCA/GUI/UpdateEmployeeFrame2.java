@@ -49,7 +49,14 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     private void setEmpDetails(String empId) {
         try
         {
-            empIdTxt.setText(EmployeesDao.empId());
+            Employees emp=EmployeesDao.getEmpDetailById(empId);
+            if(emp==null)
+            {
+                JOptionPane.showMessageDialog(null,"Error While retriving Emp Id","Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            empIdTxt.setText(emp.getEmp_id());
+                
         }
         catch(SQLException ex)
         {
