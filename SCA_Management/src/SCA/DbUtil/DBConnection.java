@@ -14,7 +14,8 @@ import java.sql.SQLException;
  * @author ankitjain
  */
 public class DBConnection {
-    final static String DB_URL="jdbc:oracle:thin:@OracleDB2_high?TNS_ADMIN=/Users/Neel_Esh/Downloads/Wallet_OracleDB2";
+    //final static String DB_URL="jdbc:oracle:thin:@OracleDB2_high?TNS_ADMIN=/Users/Neel_Esh/Downloads/Wallet_OracleDB2";
+    final static String DB_URL="jdbc:oracle:thin:@OracleDB2_high?TNS_ADMIN=/Users/ankitjain/Oracle_Files/Wallet_OracleDB2";
    final static String DB_USER_NAME="sca";
    final static String DB_PASS="Ankitjain1995";
    private static Connection conn=null;
