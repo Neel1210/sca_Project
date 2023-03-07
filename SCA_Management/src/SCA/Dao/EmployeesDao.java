@@ -119,6 +119,7 @@ public class EmployeesDao {
             emp.setFather_name(rs.getString(3));
             emp.setContact(rs.getString(4));
             emp.setAge(rs.getInt(5));
+            
             emp.setGender(rs.getString(7));
             emp.setMail_id(rs.getString(8));
             emp.setStatus(rs.getString(14));
@@ -127,4 +128,12 @@ public class EmployeesDao {
         }
         return empList;
     }
+   
+   public static boolean removeEmp(String empId) throws SQLException
+   {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = conn.prepareStatement("update employees set status='Un-Active' where emp_id=?");
+        ps.setString(1, empId);
+        return 1 == ps.executeUpdate();
+   }
 }
