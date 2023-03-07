@@ -93,7 +93,6 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         jrbMale = new javax.swing.JRadioButton();
         jrbFemale = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
-        jDate = new com.toedter.calendar.JDateChooser();
         jLabel16 = new javax.swing.JLabel();
         jrbActive = new javax.swing.JRadioButton();
         jrbNot_Active = new javax.swing.JRadioButton();
@@ -101,6 +100,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jDate = new com.toedter.calendar.JDateChooser();
         btnDocument = new javax.swing.JButton();
         txtDocument = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -175,7 +175,6 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
 
         jLabel15.setText("Date of Joining");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 518, -1, -1));
-        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 286, 27));
 
         jLabel16.setText("Status");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 514, 75, -1));
@@ -197,6 +196,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
 
         jLabel19.setText("Emp Id");
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 78, -1));
+        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 286, 27));
 
         btnDocument.setText("Documents");
         btnDocument.addActionListener(new java.awt.event.ActionListener() {
