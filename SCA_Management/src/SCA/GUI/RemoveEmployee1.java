@@ -167,10 +167,10 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
             {   
                 try
                 {
-                    String empId=((String)jTable.getValueAt(row,1));
+                    String empId=((String)jTable.getValueAt(row,0));
                     System.out.println(empId);
                     if(EmployeesDao.removeEmp(empId))
-                       JOptionPane.showMessageDialog(null,"EMployee Removed Successfully","SuccessFully",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Employee Removed Successfully","SuccessFully",JOptionPane.INFORMATION_MESSAGE);
                     model = (DefaultTableModel)jTable.getModel();
                     loadData();
                     return;

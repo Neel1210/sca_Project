@@ -84,7 +84,7 @@ public class EmployeesDao {
    public static ArrayList<Employees> getDetails() throws SQLException
     {
         Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement("Select * from employees where status='Actice'");
+        PreparedStatement ps = conn.prepareStatement("Select * from employees where status='Active'");
         ResultSet rs = ps.executeQuery();
         ArrayList<Employees> empList = new ArrayList<>();
         while(rs.next())
@@ -119,9 +119,7 @@ public class EmployeesDao {
             emp.setFather_name(rs.getString(3));
             emp.setContact(rs.getString(4));
             emp.setAge(rs.getInt(5));
-
             emp.setAddress(rs.getString(6));
-
             emp.setGender(rs.getString(7));
             emp.setMail_id(rs.getString(8));
             emp.setBank_name(rs.getString(9));
@@ -143,6 +141,7 @@ public class EmployeesDao {
    public static boolean removeEmp(String empId) throws SQLException
    {
         Connection conn = DBConnection.getConnection();
+        System.out.println(empId);
         PreparedStatement ps = conn.prepareStatement("update employees set status='Un-Active' where emp_id=?");
         ps.setString(1, empId);
         return 1 == ps.executeUpdate();
