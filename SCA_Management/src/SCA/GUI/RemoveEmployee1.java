@@ -6,6 +6,7 @@
 package SCA.GUI;
 
 import SCA.Dao.EmployeesDao;
+import SCA.DbUtil.DBConnection;
 import SCA.POJO.Employees;
 import java.sql.SQLException;
 import java.util.List;
@@ -203,6 +204,12 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
 
     private void btnBack2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack2ActionPerformed
         // TODO add your handling code here:
+         int ans;
+        ans=JOptionPane.showConfirmDialog(null,"Are You Sure?","Quitting!",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if (ans==JOptionPane.YES_OPTION){
+            DBConnection.closeConnection();
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnBack2ActionPerformed
 
     /**
