@@ -81,7 +81,7 @@ public class EmployeesDao {
         
         ps.setBlob(18,emp.getPhoto());
         
-        String dob = emp.getJoining_date();
+        String dob = emp.getDob();
         gen = sdf.parse(dob);
         java.sql.Date genDob = new java.sql.Date(gen.getTime());
         ps.setDate(19, genDob);
