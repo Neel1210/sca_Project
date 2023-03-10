@@ -14,6 +14,14 @@ import java.io.FileInputStream;
  */
 public class Employees {
 
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
     public FileInputStream getPhoto() {
         return photo;
     }
@@ -39,6 +47,7 @@ public class Employees {
     private int salary;
     private File documents;
     private FileInputStream photo=null;
+    private String dob;
 
     public String getEmp_id() {
         return emp_id;

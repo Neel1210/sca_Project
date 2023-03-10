@@ -541,9 +541,9 @@ private boolean validateInputs()
         return true;
     }   
     
-    if(gender==null || status==null || joining_date==null)
+    if(gender==null || status==null || joining_date==null || dob==null)
     {
-        JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date!!");
+        JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date Or Dob!!");
         return true;
     }   
     
