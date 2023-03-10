@@ -30,6 +30,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
      */
    private File file;
    
+   private int uplaodFlag=0;
     private String gender=null;
     private Date joining_date;
     private String status=null;
@@ -45,6 +46,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setEmpDetails(empId);
+        btnDocument.setEnabled(false);
     }
 
     private void setEmpDetails(String empId) throws ParseException {
@@ -93,10 +95,6 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
            }
            txtPancard.setText(emp.getPan_card());
            txtSalary.setText(String.valueOf(emp.getSalary()));
-           
-           
-            
-            
                 
         }
         catch(SQLException ex)
@@ -139,7 +137,6 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         txtPinCode = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtPancard = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         txtSalary = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -157,100 +154,103 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         btnDocument = new javax.swing.JButton();
         txtDocument = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        sep = new javax.swing.JSeparator();
+        uplaodDoc = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(940, 680));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("ADD EMPLOYEE'S");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 165, -1));
+        jLabel1.setText("UPDATE EMPLOYEE'S");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 165, -1));
 
         empIdTxt.setText("Id");
-        jPanel1.add(empIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 78, -1));
+        jPanel1.add(empIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 78, -1));
 
         jLabel3.setText("Father's Name");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
 
         jLabel4.setText("Age");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 53, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 53, -1));
 
         jLabel5.setText("Address");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         jLabel6.setText("Contact");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 88, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 88, -1));
 
         jLabel7.setText("Account No.");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 90, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 90, -1));
 
         jLabel8.setText("IFSC Code");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 452, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
 
         jLabel9.setText("Bank Name");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 382, -1, -1));
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 290, -1));
-        jPanel1.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 250, -1));
-        jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 290, -1));
-        jPanel1.add(txtContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 250, -1));
-        jPanel1.add(txtAddres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 730, -1));
-        jPanel1.add(txtBank, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 286, -1));
-        jPanel1.add(txtAccNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 380, 234, -1));
-        jPanel1.add(txtIfsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 286, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 290, -1));
+        jPanel1.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 250, -1));
+        jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 290, -1));
+        jPanel1.add(txtContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 250, -1));
+        jPanel1.add(txtAddres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 730, -1));
+        jPanel1.add(txtBank, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 286, -1));
+        jPanel1.add(txtAccNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 340, 234, -1));
+        jPanel1.add(txtIfsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 286, -1));
 
         jLabel10.setText("Pin Code");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 452, 98, -1));
-        jPanel1.add(txtPinCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 450, 232, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 98, -1));
+        jPanel1.add(txtPinCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 232, -1));
 
         jLabel11.setText("PanCard Number");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 574, -1, -1));
-        jPanel1.add(txtPancard, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 290, -1));
-
-        jLabel12.setText("Salary");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 574, 87, -1));
-        jPanel1.add(txtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(657, 572, 231, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
+        jPanel1.add(txtPancard, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 290, -1));
+        jPanel1.add(txtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 540, 231, -1));
 
         jLabel13.setText("Gender");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jLabel14.setText("Email Id");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 310, -1, -1));
-        jPanel1.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, 230, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+        jPanel1.add(txtMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 230, -1));
 
         buttonGroup1.add(jrbMale);
         jrbMale.setText("Male");
-        jPanel1.add(jrbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
+        jPanel1.add(jrbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
 
         buttonGroup1.add(jrbFemale);
         jrbFemale.setText("Female");
-        jPanel1.add(jrbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, -1, -1));
+        jPanel1.add(jrbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
         jLabel15.setText("Date of Joining");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 518, -1, -1));
-        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 286, 27));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
+        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 286, 27));
 
         jLabel16.setText("Status");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 514, 75, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 75, -1));
 
         buttonGroup2.add(jrbActive);
         jrbActive.setText("Active");
-        jPanel1.add(jrbActive, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, -1, -1));
+        jPanel1.add(jrbActive, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, -1, -1));
 
         buttonGroup2.add(jrbNot_Active);
         jrbNot_Active.setText("Not-Active");
-        jPanel1.add(jrbNot_Active, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 510, -1, -1));
+        jPanel1.add(jrbNot_Active, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, -1, -1));
 
         jLabel17.setText("Salary");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 574, 107, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 840, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 540, 107, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 840, -1));
 
         jLabel18.setText("Name");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 78, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 78, -1));
 
         jLabel19.setText("Emp Id");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 78, -1));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 78, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 570));
 
         btnDocument.setText("Documents");
         btnDocument.addActionListener(new java.awt.event.ActionListener() {
@@ -258,51 +258,35 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
                 btnDocumentActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 603, 188, -1));
 
         txtDocument.setEditable(false);
+        getContentPane().add(txtDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 603, 422, 25));
 
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(684, 603, 94, -1));
 
         btnback.setText("Back");
+        getContentPane().add(btnback, new org.netbeans.lib.awtextra.AbsoluteConstraints(796, 603, 89, -1));
+        getContentPane().add(sep, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 870, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 38, Short.MAX_VALUE)
-                .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDocument)
-                    .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnback))
-                .addGap(24, 24, 24))
-        );
+        uplaodDoc.setText("Want to uplaod Document");
+        uplaodDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uplaodDocActionPerformed(evt);
+            }
+        });
+        getContentPane().add(uplaodDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         boolean isValidate = validateInputs();
         if(isValidate)
@@ -333,7 +317,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             emp.setSalary(salary);
             emp.setDocuments(file);
             
-            boolean ans = EmployeesDao.updateEmployee(emp);
+            boolean ans = EmployeesDao.addEmplyee(emp);
             if(ans)
             {
                 JOptionPane.showMessageDialog(this,"Data Inserted Successfully!!");
@@ -350,7 +334,12 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error while selecting date!!");
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+        catch (FileNotFoundException ex) 
+        {
+            JOptionPane.showMessageDialog(this, "Error while uploading file!!");
+            ex.printStackTrace();
+       }
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed
         // TODO add your handling code here:
@@ -363,6 +352,21 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             txtDocument.setText(file.getPath()); 
         }
     }//GEN-LAST:event_btnDocumentActionPerformed
+
+    private void uplaodDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uplaodDocActionPerformed
+        // TODO add your handling code here:
+        if(uplaodDoc.isSelected())
+        {
+            uplaodFlag=1;
+            btnDocument.setEnabled(true);
+        }
+            
+        else
+        {
+            uplaodFlag=0;
+            btnDocument.setEnabled(false);
+        }
+    }//GEN-LAST:event_uplaodDocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,8 +411,8 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDocument;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnback;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -417,7 +421,6 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -438,6 +441,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbFemale;
     private javax.swing.JRadioButton jrbMale;
     private javax.swing.JRadioButton jrbNot_Active;
+    private javax.swing.JSeparator sep;
     private javax.swing.JTextField txtAccNo;
     private javax.swing.JTextField txtAddres;
     private javax.swing.JTextField txtAge;
@@ -451,6 +455,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtPancard;
     private javax.swing.JTextField txtPinCode;
     private javax.swing.JTextField txtSalary;
+    private javax.swing.JCheckBox uplaodDoc;
     // End of variables declaration//GEN-END:variables
 
 private void clearAll()
@@ -470,7 +475,7 @@ private void clearAll()
     txtSalary.setText("");
     buttonGroup1.clearSelection();
     buttonGroup2.clearSelection();
-    jDate.setCalendar(null);
+    jDate.cleanup();
 }
     
 private boolean validateInputs()
