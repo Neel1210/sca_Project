@@ -263,7 +263,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         txtDocument.setEditable(false);
         getContentPane().add(txtDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 603, 422, 25));
 
-        btnAdd.setText("Add");
+        btnAdd.setText("Update");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -272,6 +272,11 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(684, 603, 94, -1));
 
         btnback.setText("Back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnback, new org.netbeans.lib.awtextra.AbsoluteConstraints(796, 603, 89, -1));
         getContentPane().add(sep, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 870, 20));
 
@@ -296,8 +301,8 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         }
         
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             Employees emp = new Employees();
             emp.setEmp_id(empIdTxt.getText().trim());
             emp.setName(txtName.getText().trim());
@@ -316,12 +321,20 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             emp.setPan_card(txtPancard.getText().trim());
             emp.setSalary(salary);
             emp.setDocuments(file);
-            
-            boolean ans = EmployeesDao.addEmplyee(emp);
+            boolean ans;
+            if(uplaodDoc.isSelected())
+            {
+                ans = EmployeesDao.updateEmployeeAll(emp);
+            }
+            else
+            {
+                ans = EmployeesDao.updateEmployee(emp);
+            }
             if(ans)
             {
-                JOptionPane.showMessageDialog(this,"Data Inserted Successfully!!");
-                clearAll();
+                JOptionPane.showMessageDialog(this,"Data Updated Successfully!!");
+                new UpdateEmployee1().setVisible(true);
+                this.dispose();
             }
         } 
         catch (SQLException e) 
@@ -359,14 +372,20 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         {
             uplaodFlag=1;
             btnDocument.setEnabled(true);
-        }
-            
+        }  
         else
         {
             uplaodFlag=0;
+            txtDocument.setText("");
             btnDocument.setEnabled(false);
         }
     }//GEN-LAST:event_uplaodDocActionPerformed
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        // TODO add your handling code here:
+        new UpdateEmployee1().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnbackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -488,6 +507,12 @@ private boolean validateInputs()
         JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date!!");
         return true;
     }     
+    
+    if(uplaodDoc.isSelected() && txtDocument.getText().isEmpty())
+    {
+        JOptionPane.showMessageDialog(this, "Please select Documents Also!!");
+        return true;
+    }
         
     if(txtName.getText().isEmpty()||txtFname.getText().isEmpty()||txtAge.getText().isEmpty()
             ||txtContact.getText().isEmpty()||txtAddres.getText().isEmpty()||txtMail.getText().isEmpty()

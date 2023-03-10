@@ -199,4 +199,36 @@ public class EmployeesDao {
         return x != 0;
         
     }
+    
+    public static boolean updateEmployeeAll(Employees emp)throws SQLException, ParseException, FileNotFoundException
+    {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = conn.prepareStatement("update employees set emp_name=? ,father_name=? ,contact=? ,age=? ,address=?,gender=?,email_id=?,bank_name=?,acc_no=?,ifsc_code=?,pin_code=?,joining_date=?,status=?,pan_card=?,salary=?,documents=? where emp_id=?");
+        ps.setString(1, emp.getName());
+        ps.setString(2, emp.getFather_name());
+        ps.setString(3,emp.getContact());
+        ps.setInt(4, emp.getAge());
+        ps.setString(5, emp.getAddress());
+        ps.setString(6,emp.getGender());
+        ps.setString(7, emp.getMail_id());
+        ps.setString(8,emp.getBank_name());
+        ps.setString(9,emp.getAccount_no());
+        ps.setString(10, emp.getIfsc_code());
+        ps.setString(11,emp.getPin_code());
+         String genDate = emp.getJoining_date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date gen = sdf.parse(genDate);
+        java.sql.Date genD = new java.sql.Date(gen.getTime());
+        ps.setDate(12, genD);
+        ps.setString(13, emp.getStatus());
+        ps.setString(14, emp.getPan_card());
+        ps.setDouble(15,emp.getSalary());
+        ps.setString(17, emp.getEmp_id());
+        File f=emp.getDocuments();
+        FileInputStream fin = new FileInputStream(emp.getDocuments().getPath());
+        ps.setBlob(16, fin, (int)f.length());
+        int x=ps.executeUpdate();
+        return x != 0;
+        
+    }
 }
