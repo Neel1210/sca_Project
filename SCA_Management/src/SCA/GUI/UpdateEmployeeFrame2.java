@@ -166,7 +166,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("ADD EMPLOYEE'S");
+        jLabel1.setText("UPDATE EMPLOYEE'S");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 165, -1));
 
         empIdTxt.setText("Id");

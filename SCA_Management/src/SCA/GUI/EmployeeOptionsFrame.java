@@ -36,6 +36,7 @@ public class EmployeeOptionsFrame extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        btnRemoveEmp1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +63,8 @@ public class EmployeeOptionsFrame extends javax.swing.JFrame {
             }
         });
 
+        btnRemoveEmp1.setText("View All Employees");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -76,7 +79,8 @@ public class EmployeeOptionsFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnRemoveEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                             .addComponent(btnUpdateEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAddEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnAddEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemoveEmp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
                         .addGap(181, 181, 181))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(141, 141, 141)
@@ -95,11 +99,13 @@ public class EmployeeOptionsFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(btnAddEmp)
-                .addGap(76, 76, 76)
+                .addGap(55, 55, 55)
                 .addComponent(btnUpdateEmp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(btnRemoveEmp)
-                .addGap(87, 87, 87)
+                .addGap(50, 50, 50)
+                .addComponent(btnRemoveEmp1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +188,7 @@ public class EmployeeOptionsFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAddEmp;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRemoveEmp;
+    private javax.swing.JButton btnRemoveEmp1;
     private javax.swing.JButton btnUpdateEmp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

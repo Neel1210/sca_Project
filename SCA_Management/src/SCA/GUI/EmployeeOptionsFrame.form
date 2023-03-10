@@ -50,6 +50,7 @@
                               <Component id="btnRemoveEmp" pref="309" max="32767" attributes="0"/>
                               <Component id="btnUpdateEmp" max="32767" attributes="0"/>
                               <Component id="btnAddEmp" max="32767" attributes="0"/>
+                              <Component id="btnRemoveEmp1" alignment="0" pref="309" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
                       </Group>
@@ -76,11 +77,13 @@
                   <Component id="jSeparator1" min="-2" pref="21" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="btnAddEmp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="btnUpdateEmp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="btnRemoveEmp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnRemoveEmp1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="67" max="32767" attributes="0"/>
                   <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
@@ -127,6 +130,11 @@
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRemoveEmp1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="View All Employees"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
