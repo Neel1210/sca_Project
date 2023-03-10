@@ -11,6 +11,9 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -145,4 +148,27 @@ public class EmployeesDao {
         ps.setString(1, empId);
         return 1 == ps.executeUpdate();
    }
+   
+    public static String getDocsFileName()throws FileNotFoundException, IOException, SQLException
+    {
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select documents from employees"); ResultSet rs=ps.executeQuery();
+        if(rs.next())
+        {
+            Blob b=rs.getBlob(1);
+            byte barr[]=b.getBytes(1,(int)b.length());
+            try (FileOutputStream fout = new FileOutputStream("/Users/ankitjain/output"+".pdf")) {
+                fout.write(barr);
+                
+            }
+            Documents docs = new Documents("/Users/ankitjain/output");
+        }
+        
+        } catch (Exception e) {
+        }
+        String url = new String("/Users/ankitjain/output");
+        return url;
+    }
+    
 }

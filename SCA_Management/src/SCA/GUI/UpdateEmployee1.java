@@ -8,7 +8,10 @@ package SCA.GUI;
 import SCA.Dao.EmployeesDao;
 import SCA.POJO.Employees;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -164,7 +167,11 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
         {
             String empId=(String)jTable.getValueAt(row,0).toString().trim();
             
-            new UpdateEmployeeFrame2(empId).setVisible(true);
+            try {
+                new UpdateEmployeeFrame2(empId).setVisible(true);
+            } catch (ParseException ex) {
+                Logger.getLogger(UpdateEmployee1.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.dispose();
         }
         else

@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -34,19 +35,19 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     private String status=null;
     private int salary;
     
-    public UpdateEmployeeFrame2() {
+    public UpdateEmployeeFrame2() throws ParseException {
         initComponents();
         setLocationRelativeTo(null);
         setEmpDetails("Emp-101");
     }
     
-    public UpdateEmployeeFrame2(String empId) {
+    public UpdateEmployeeFrame2(String empId) throws ParseException {
         initComponents();
         setLocationRelativeTo(null);
         setEmpDetails(empId);
     }
 
-    private void setEmpDetails(String empId) {
+    private void setEmpDetails(String empId) throws ParseException {
         try
         {
             Employees emp=EmployeesDao.getEmpDetailById(empId);
@@ -56,6 +57,46 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
                 return;
             }
             empIdTxt.setText(emp.getEmp_id());
+            txtName.setText(emp.getName());
+            txtFname.setText(emp.getFather_name());
+            txtAge.setText(String.valueOf(emp.getAge()));
+            txtContact.setText(emp.getContact());
+            txtAddres.setText(emp.getAddress());
+            if(emp.getGender().equals("Male"))
+            {
+                ButtonModel model = jrbMale.getModel();
+                 buttonGroup1.setSelected(model, true);
+            }
+             else
+            {  ButtonModel model1 = jrbFemale.getModel();
+            buttonGroup1.setSelected(model1, true);
+                
+            }
+              
+         
+           txtMail.setText(emp.getMail_id());
+           txtBank.setText(emp.getBank_name());
+           txtAccNo.setText(emp.getAccount_no());
+           txtIfsc.setText(emp.getIfsc_code());
+           txtPinCode.setText(emp.getPin_code());
+           SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+           jDate.setDate(sdf.parse(emp.getJoining_date()));
+           if(emp.getStatus().equals("Active"))
+           {
+               ButtonModel model = jrbActive.getModel();
+               buttonGroup2.setSelected(model, true);
+           }
+           else
+           {
+               ButtonModel model1 = jrbNot_Active.getModel();
+               buttonGroup2.setSelected(model1, true);
+           }
+           txtPancard.setText(emp.getPan_card());
+           txtSalary.setText(String.valueOf(emp.getSalary()));
+           
+           
+            
+            
                 
         }
         catch(SQLException ex)
@@ -361,7 +402,11 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateEmployeeFrame2().setVisible(true);
+                try {
+                    new UpdateEmployeeFrame2().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(UpdateEmployeeFrame2.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
