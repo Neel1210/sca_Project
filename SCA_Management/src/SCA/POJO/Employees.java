@@ -6,12 +6,21 @@
 package SCA.POJO;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 /**
  *
  * @author ankitjain
  */
 public class Employees {
+
+    public FileInputStream getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(FileInputStream photo) {
+        this.photo = photo;
+    }
     private String emp_id;
     private String name;
     private String father_name;
@@ -29,6 +38,7 @@ public class Employees {
     private String pan_card;
     private int salary;
     private File documents;
+    private FileInputStream photo=null;
 
     public String getEmp_id() {
         return emp_id;

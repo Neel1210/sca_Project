@@ -94,7 +94,7 @@ public class ViewAllActiveEmployees extends javax.swing.JFrame {
         });
         jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 140, -1));
 
-        updateBtn.setText("Update");
+        updateBtn.setText("View Employee");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
