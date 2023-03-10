@@ -35,7 +35,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtDocument" min="-2" pref="422" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnAdd" min="-2" pref="94" max="-2" attributes="0"/>
+              <Component id="btnUpdate" min="-2" pref="94" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnback" min="-2" pref="89" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -51,7 +51,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDocument" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDocument" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnback" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -424,12 +424,12 @@
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAdd">
+    <Component class="javax.swing.JButton" name="btnUpdate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnback">

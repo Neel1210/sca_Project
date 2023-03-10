@@ -157,7 +157,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         btnDocument = new javax.swing.JButton();
         txtDocument = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -261,10 +261,10 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
 
         txtDocument.setEditable(false);
 
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -280,7 +280,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
@@ -294,7 +294,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDocument)
                     .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
                     .addComponent(btnback))
                 .addGap(24, 24, 24))
         );
@@ -302,7 +302,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         boolean isValidate = validateInputs();
         if(isValidate)
@@ -333,7 +333,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             emp.setSalary(salary);
             emp.setDocuments(file);
             
-            boolean ans = EmployeesDao.addEmplyee(emp);
+            boolean ans = EmployeesDao.updateEmployee(emp);
             if(ans)
             {
                 JOptionPane.showMessageDialog(this,"Data Inserted Successfully!!");
@@ -350,12 +350,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error while selecting date!!");
             ex.printStackTrace();
         }
-        catch (FileNotFoundException ex) 
-        {
-            JOptionPane.showMessageDialog(this, "Error while uploading file!!");
-            ex.printStackTrace();
-       }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed
         // TODO add your handling code here:
@@ -412,8 +407,8 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDocument;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnback;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -475,7 +470,7 @@ private void clearAll()
     txtSalary.setText("");
     buttonGroup1.clearSelection();
     buttonGroup2.clearSelection();
-    jDate.cleanup();
+    jDate.setCalendar(null);
 }
     
 private boolean validateInputs()
