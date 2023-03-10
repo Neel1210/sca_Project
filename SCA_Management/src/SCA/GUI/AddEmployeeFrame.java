@@ -527,8 +527,9 @@ private void clearAll()
     txtSalary.setText("");
     buttonGroup1.clearSelection();
     buttonGroup2.clearSelection();
-    dob.cleanup();
-    jDate.cleanup();
+    dob.setCalendar(null);
+    jDate.setCalendar(null);
+    txtDocument.setText("");
 }
     
 private boolean validateInputs()
