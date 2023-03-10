@@ -34,7 +34,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
    private File file;
    
     private String gender=null;
-    private Date joining_date;
+    private Date joining_date,dDob;
     private String status=null;
     private int salary;
     private int picUpload=0;
@@ -346,6 +346,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
             emp.setPan_card(txtPancard.getText().trim());
             emp.setSalary(salary);
             emp.setDocuments(file);
+            emp.setDob(sdf.format(dDob));
             
             boolean ans = EmployeesDao.addEmplyee(emp);
             if(ans)
@@ -527,13 +528,15 @@ private void clearAll()
     buttonGroup1.clearSelection();
     buttonGroup2.clearSelection();
     dob.cleanup();
+    jDate.cleanup();
 }
     
 private boolean validateInputs()
 {
     status = getStatus();
     gender = getGender();
-    joining_date = dob.getDate();
+    joining_date = jDate.getDate();
+    dDob = dob.getDate();
     
     if(picUpload!=1)
     {

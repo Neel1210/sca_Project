@@ -47,7 +47,7 @@ public class EmployeesDao {
     public static boolean addEmplyee(Employees emp) throws SQLException, ParseException, FileNotFoundException
     {
         Connection conn = DBConnection.getConnection();
-        String qry = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String qry = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement ps=conn.prepareStatement(qry);
         
@@ -74,13 +74,18 @@ public class EmployeesDao {
         ps.setString(14,emp.getStatus());
         ps.setString(15,emp.getPan_card());
         ps.setInt(16,emp.getSalary());
-        //-->
         
         File f=emp.getDocuments();
         FileInputStream fin = new FileInputStream(emp.getDocuments().getPath());
         ps.setBlob(17, fin, (int)f.length());
         
-       
+        ps.setBlob(18,emp.getPhoto());
+        
+        String dob = emp.getJoining_date();
+        gen = sdf.parse(dob);
+        java.sql.Date genDob = new java.sql.Date(gen.getTime());
+        ps.setDate(19, genDob);
+        
         return 1==ps.executeUpdate(); 
     }
     
