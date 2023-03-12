@@ -7,6 +7,8 @@ package SCA.GUI;
 
 import SCA.Dao.EmployeesDao;
 import SCA.POJO.Employees;
+import SCA.POJO.UserProfile;
+import SCA.Utility.SlipGenerator;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -17,26 +19,28 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Neel_Esh
+ * @author ankitjain
  */
-public class UpdateEmployee1 extends javax.swing.JFrame {
+public class ManageSalaryFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form UpdateEmployee1
+     * Creates new form AdminOptionsFrame
      */
     DefaultTableModel model;
-    
-    public UpdateEmployee1() {
+    List<Employees> list;
+    public ManageSalaryFrame() {
         initComponents();
+        setLocationRelativeTo(null);
         model = (DefaultTableModel)jTable.getModel();
         loadData();
+        //txtlabel.setText("Welcome "+UserProfile.getUsername());
         
     }
-
+    
     public void loadData()
     {
         try {
-            List<Employees> list=EmployeesDao.getDetails();
+            list=EmployeesDao.getDetails();
             if(list.isEmpty())
             {
                 JOptionPane.showMessageDialog(this,"No Records Found");
@@ -62,7 +66,7 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,18 +77,26 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        year = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
-        updateBtn = new javax.swing.JButton();
+        generateSalaryBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jSeparator2 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
         quitBtn = new javax.swing.JButton();
+        month = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(940, 680));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        year.setBackground(new java.awt.Color(173, 192, 234));
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        year.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 160, 30));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -92,16 +104,16 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 140, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 150, -1));
 
-        updateBtn.setText("Update");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+        generateSalaryBtn.setText("Generate Salary Slip");
+        generateSalaryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
+                generateSalaryBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 620, 390, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 840, 10));
+        jPanel1.add(generateSalaryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 370, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 880, 20));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,16 +139,12 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable);
-        if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(0).setResizable(false);
-            jTable.getColumnModel().getColumn(1).setResizable(false);
-            jTable.getColumnModel().getColumn(2).setResizable(false);
-            jTable.getColumnModel().getColumn(3).setResizable(false);
-            jTable.getColumnModel().getColumn(4).setResizable(false);
-        }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 840, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 840, 10));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 162, 840, 450));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel12.setText("Salary Month -");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 180, 30));
 
         quitBtn.setText("Quit");
         quitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -144,48 +152,42 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
                 quitBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(quitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 620, 160, -1));
+        jPanel1.add(quitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 640, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        month.setBackground(new java.awt.Color(173, 192, 234));
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "JulyA", "ugust", "September", "October", "November", "December" }));
+        month.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 170, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 680));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        // TODO add your handling code here:
-        int row=jTable.getSelectedRow();
-        if(row!=-1)
-        {
-            String empId=(String)jTable.getValueAt(row,0).toString().trim();
-            
-            try {
-                new UpdateEmployeeFrame2(empId).setVisible(true);
-            } catch (ParseException ex) {
-                Logger.getLogger(UpdateEmployee1.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.dispose();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Please select any row","Error",JOptionPane.ERROR_MESSAGE);
-            return;
-        }  
-    }//GEN-LAST:event_updateBtnActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        new EmployeeOptionsFrame().setVisible(true);
+        new AdminOptionsFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void generateSalaryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateSalaryBtnActionPerformed
+        // TODO add your handling code here:
+        String mon_year=(String)month.getSelectedItem()+"_"+(String)year.getSelectedItem();
+        if(list.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"No Available Record","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        for(Employees emp2:list)
+        {
+            SlipGenerator.generateSlip(emp2,mon_year);
+        }
+        
+        JOptionPane.showMessageDialog(null,"Salary Slip generated Successfully","Success",JOptionPane.INFORMATION_MESSAGE);
+        return;
+
+    }//GEN-LAST:event_generateSalaryBtnActionPerformed
 
     private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
         // TODO add your handling code here:
@@ -210,32 +212,35 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateEmployee1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSalaryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateEmployee1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSalaryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateEmployee1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSalaryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateEmployee1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSalaryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateEmployee1().setVisible(true);
+                new ManageSalaryFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton generateSalaryBtn;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable;
+    private javax.swing.JComboBox<String> month;
     private javax.swing.JButton quitBtn;
-    private javax.swing.JButton updateBtn;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }

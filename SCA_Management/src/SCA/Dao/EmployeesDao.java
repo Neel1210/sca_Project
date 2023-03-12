@@ -106,10 +106,28 @@ public class EmployeesDao {
             emp.setFather_name(rs.getString(3));
             emp.setContact(rs.getString(4));
             emp.setAge(rs.getInt(5));
+            emp.setAddress(rs.getString(6));
             emp.setGender(rs.getString(7));
             emp.setMail_id(rs.getString(8));
+            emp.setBank_name(rs.getString(9));
+            emp.setAccount_no(rs.getString(10));
+            emp.setIfsc_code(rs.getString(11));
+            emp.setPin_code(rs.getString(12));
+            
+            java.sql.Date sjd = rs.getDate(13);
+            java.util.Date ujd = (java.util.Date)sjd;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            emp.setJoining_date(sdf.format(ujd));
+            
             emp.setStatus(rs.getString(14));
+            emp.setPan_card(rs.getString(15));
             emp.setSalary(rs.getInt(16));
+            
+            sjd = rs.getDate(19);
+            ujd = (java.util.Date)sjd;
+            sdf = new SimpleDateFormat("dd-MM-yyyy");
+            emp.setDob(sdf.format(ujd));
+            
             empList.add(emp);
         }
         return empList;
