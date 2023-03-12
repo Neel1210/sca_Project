@@ -8,8 +8,12 @@ package SCA.GUI;
 import SCA.Dao.EmployeesDao;
 import SCA.POJO.Employees;
 import SCA.POJO.UserProfile;
+import SCA.Utility.SlipGenerator;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +27,7 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
      * Creates new form AdminOptionsFrame
      */
     DefaultTableModel model;
+    List<Employees> list;
     public ManageSalaryFrame() {
         initComponents();
         setLocationRelativeTo(null);
@@ -35,7 +40,7 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
     public void loadData()
     {
         try {
-            List<Employees> list=EmployeesDao.getDetails();
+            list=EmployeesDao.getDetails();
             if(list.isEmpty())
             {
                 JOptionPane.showMessageDialog(this,"No Records Found");
@@ -167,6 +172,21 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
 
     private void generateSalaryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateSalaryBtnActionPerformed
         // TODO add your handling code here:
+        String mon_year=(String)month.getSelectedItem()+"_"+(String)year.getSelectedItem();
+        if(list.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"No Available Record","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        for(Employees emp2:list)
+        {
+            SlipGenerator.generateSlip(emp2,mon_year);
+        }
+        
+        JOptionPane.showMessageDialog(null,"Salary Slip generated Successfully","Success",JOptionPane.INFORMATION_MESSAGE);
+        return;
+
     }//GEN-LAST:event_generateSalaryBtnActionPerformed
 
     private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
