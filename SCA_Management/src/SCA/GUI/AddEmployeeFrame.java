@@ -37,6 +37,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     private String gender=null;
     private Date joining_date,dDob;
     private String status=null;
+    private String work_mode=null;
     private int salary;
     private int picUpload=0;
     Employees emp=null;
@@ -70,6 +71,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         btnDocument = new javax.swing.JButton();
         txtDocument = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -120,6 +122,11 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         jDate = new com.toedter.calendar.JDateChooser();
         jLabel20 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        txtDesignation = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jrbOnline = new javax.swing.JRadioButton();
+        jrbOffline = new javax.swing.JRadioButton();
         jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,7 +161,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 51));
         jLabel1.setText("Bank Details");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 165, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 165, 20));
 
         empIdTxt.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         empIdTxt.setText("Id");
@@ -178,34 +185,46 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Account No.");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 90, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 90, 30));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("IFSC Code");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, 30));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setText("Bank Name");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 90, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 90, 30));
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 290, 30));
         jPanel1.add(txtFname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 290, 30));
         jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 160, 30));
         jPanel1.add(txtContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 290, 30));
         jPanel1.add(txtAddres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 730, 30));
-        jPanel1.add(txtBank, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 286, 30));
-        jPanel1.add(txtAccNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 250, 30));
-        jPanel1.add(txtIfsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 286, 30));
+        jPanel1.add(txtBank, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 280, 30));
+        jPanel1.add(txtAccNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, 250, 30));
+
+        txtIfsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIfscActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtIfsc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 280, 30));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setText("Pin Code");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 98, 30));
-        jPanel1.add(txtPinCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 250, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, 98, 30));
+
+        txtPinCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPinCodeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPinCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, 250, 30));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setText("Pan Number");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, 30));
-        jPanel1.add(txtPancard, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 290, 30));
-        jPanel1.add(txtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 250, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, -1, 30));
+        jPanel1.add(txtPancard, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 570, 280, 30));
+        jPanel1.add(txtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 620, 250, 30));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel13.setText("Gender");
@@ -232,22 +251,27 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel16.setText("Status");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, 75, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, 75, 30));
 
         buttonGroup2.add(jrbActive);
         jrbActive.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jrbActive.setText("Active");
-        jPanel1.add(jrbActive, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, -1, -1));
+        jrbActive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActiveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jrbActive, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 570, -1, -1));
 
         buttonGroup2.add(jrbNot_Active);
         jrbNot_Active.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jrbNot_Active.setText("Not-Active");
-        jPanel1.add(jrbNot_Active, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, -1, -1));
+        jPanel1.add(jrbNot_Active, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel17.setText("Salary");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, 107, 30));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 870, 10));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 620, 107, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 870, 10));
 
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel18.setText("Name");
@@ -280,15 +304,35 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(photoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 240, 30));
-        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 286, 30));
+        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 286, 30));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel20.setText("Joining Date");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, 30));
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, 30));
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setText("ADD EMPLOYEE'S");
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 153, 255));
+        jLabel12.setText("ADD EMPLOYEE");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 180, -1));
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel21.setText("Designation");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        jPanel1.add(txtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 270, 30));
+
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel22.setText("Work Mode");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 100, -1));
+
+        buttonGroup3.add(jrbOnline);
+        jrbOnline.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jrbOnline.setText("Online");
+        jPanel1.add(jrbOnline, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, -1, -1));
+
+        buttonGroup3.add(jrbOffline);
+        jrbOffline.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jrbOffline.setText("Offline");
+        jPanel1.add(jrbOffline, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 380, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,7 +357,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addGap(4, 4, 4)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -359,6 +403,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
             emp.setDocuments(file1);
             emp.setPhoto(file2);
             emp.setDob(sdf.format(dDob));
+            emp.setWork_mode(work_mode);
+            emp.setDesignation(txtDesignation.getText().trim());
             
             boolean ans = EmployeesDao.addEmplyee(emp);
             if(ans)
@@ -439,6 +485,18 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnbackActionPerformed
 
+    private void txtIfscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIfscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIfscActionPerformed
+
+    private void jrbActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActiveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbActiveActionPerformed
+
+    private void txtPinCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPinCodeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -481,6 +539,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnback;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private com.toedter.calendar.JDateChooser dob;
     private javax.swing.JLabel empIdTxt;
     private com.toedter.calendar.JDateChooser jDate;
@@ -497,6 +556,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -514,6 +575,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbFemale;
     private javax.swing.JRadioButton jrbMale;
     private javax.swing.JRadioButton jrbNot_Active;
+    private javax.swing.JRadioButton jrbOffline;
+    private javax.swing.JRadioButton jrbOnline;
     private javax.swing.JButton photoBtn;
     private javax.swing.JLabel photoLbl;
     private javax.swing.JTextField txtAccNo;
@@ -521,6 +584,7 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtBank;
     private javax.swing.JTextField txtContact;
+    private javax.swing.JTextField txtDesignation;
     private javax.swing.JTextField txtDocument;
     private javax.swing.JTextField txtFname;
     private javax.swing.JTextField txtIfsc;
@@ -548,15 +612,18 @@ private void clearAll()
     txtSalary.setText("");
     buttonGroup1.clearSelection();
     buttonGroup2.clearSelection();
+    buttonGroup3.clearSelection();
     dob.setCalendar(null);
     jDate.setCalendar(null);
     txtDocument.setText("");
+    txtDesignation.setText("");
 }
     
 private boolean validateInputs()
 {
     status = getStatus();
     gender = getGender();
+    work_mode = getWorkMode();
     joining_date = jDate.getDate();
     dDob = dob.getDate();
     
@@ -566,9 +633,9 @@ private boolean validateInputs()
         return true;
     }   
     
-    if(gender==null || status==null || joining_date==null || dob==null)
+    if(gender==null || status==null || joining_date==null || dob==null || work_mode==null)
     {
-        JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date Or Dob!!");
+        JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date Or Dob Or Work_Mode!!");
         return true;
     }   
     
@@ -576,7 +643,7 @@ private boolean validateInputs()
             ||txtContact.getText().isEmpty()||txtAddres.getText().isEmpty()||txtMail.getText().isEmpty()
             ||txtBank.getText().isEmpty()||txtAccNo.getText().isEmpty()||txtIfsc.getText().isEmpty()
             ||txtPinCode.getText().isEmpty()||joining_date==null||txtPancard.getText().isEmpty()
-            ||txtSalary.getText().isEmpty())
+            ||txtSalary.getText().isEmpty()||txtDesignation.getText().isEmpty())
         return true;
     salary = Integer.parseInt(txtSalary.getText().trim());
     return false; 
@@ -603,4 +670,13 @@ private String getStatus()
         return null;
 }
 
+private String getWorkMode()
+{
+    if(jrbOnline.isSelected())
+        return jrbOnline.getText();
+    else if(jrbOffline.isSelected())
+        return jrbOffline.getText();
+    else 
+        return null;
+}
 }

@@ -48,6 +48,26 @@ public class Employees {
     private File documents;
     private File photo=null;
     private String dob;
+    private String work_mode;
+    private String designation;
+
+    public String getWork_mode() {
+        return work_mode;
+    }
+
+    public void setWork_mode(String work_mode) {
+        this.work_mode = work_mode;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+    
+    
 
     public String getEmp_id() {
         return emp_id;
@@ -187,10 +207,10 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employees{" + "emp_id=" + emp_id + ", name=" + name + ", father_name=" + father_name + ", age=" + age + ", contact=" + contact + ", address=" + address + ", gender=" + gender + ", mail_id=" + mail_id + ", bank_name=" + bank_name + ", account_no=" + account_no + ", ifsc_code=" + ifsc_code + ", pin_code=" + pin_code + ", joining_date=" + joining_date + ", status=" + status + ", pan_card=" + pan_card + ", salary=" + salary + ", documents=" + documents + '}';
+        return "Employees{" + "emp_id=" + emp_id + ", name=" + name + ", father_name=" + father_name + ", age=" + age + ", contact=" + contact + ", address=" + address + ", gender=" + gender + ", mail_id=" + mail_id + ", bank_name=" + bank_name + ", account_no=" + account_no + ", ifsc_code=" + ifsc_code + ", pin_code=" + pin_code + ", joining_date=" + joining_date + ", status=" + status + ", pan_card=" + pan_card + ", salary=" + salary + ", documents=" + documents + ", photo=" + photo + ", dob=" + dob + ", work_mode=" + work_mode + ", designation=" + designation + '}';
     }
 
-    public Employees(String emp_id, String name, String father_name, int age, String contact, String address, String gender, String mail_id, String bank_name, String account_no, String ifsc_code, String pin_code, String joining_date, String status, String pan_card, int salary, File documents) {
+    public Employees(String emp_id, String name, String father_name, int age, String contact, String address, String gender, String mail_id, String bank_name, String account_no, String ifsc_code, String pin_code, String joining_date, String status, String pan_card, int salary, File documents, String dob, String work_mode, String designation) {
         this.emp_id = emp_id;
         this.name = name;
         this.father_name = father_name;
@@ -208,7 +228,12 @@ public class Employees {
         this.pan_card = pan_card;
         this.salary = salary;
         this.documents = documents;
+        this.dob = dob;
+        this.work_mode = work_mode;
+        this.designation = designation;
     }
+
+    
 
   public Employees()
   {

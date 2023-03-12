@@ -376,7 +376,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
         jLabel20.setText("Joining Date");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
