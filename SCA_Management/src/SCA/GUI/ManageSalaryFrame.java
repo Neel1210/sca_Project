@@ -5,7 +5,13 @@
  */
 package SCA.GUI;
 
+import SCA.Dao.EmployeesDao;
+import SCA.POJO.Employees;
 import SCA.POJO.UserProfile;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +22,44 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
     /**
      * Creates new form AdminOptionsFrame
      */
+    DefaultTableModel model;
     public ManageSalaryFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        model = (DefaultTableModel)jTable.getModel();
+        loadData();
         //txtlabel.setText("Welcome "+UserProfile.getUsername());
         
+    }
+    
+    public void loadData()
+    {
+        try {
+            List<Employees> list=EmployeesDao.getDetails();
+            if(list.isEmpty())
+            {
+                JOptionPane.showMessageDialog(this,"No Records Found");
+                return;
+            }
+              Object[] rows=new Object[5];
+        DefaultTableModel model=(DefaultTableModel)jTable.getModel();
+        for(Employees emp:list)
+        {
+           rows[0]=emp.getEmp_id();
+           rows[1]=emp.getName();
+           rows[2]=emp.getContact();
+           rows[3]=emp.getMail_id();
+           rows[4]=emp.getSalary();
+           
+
+           model.addRow(rows);
+        }
+     
+     
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,"DB Error!!");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -33,20 +72,26 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jDate = new com.toedter.calendar.JDateChooser();
+        year = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
-        btnBack1 = new javax.swing.JButton();
+        generateSalaryBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
+        quitBtn = new javax.swing.JButton();
+        month = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 290, 30));
+
+        year.setBackground(new java.awt.Color(173, 192, 234));
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        year.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 160, 30));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -54,15 +99,15 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 640, 215, -1));
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 150, -1));
 
-        btnBack1.setText("Quit");
-        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+        generateSalaryBtn.setText("Generate Salary Slip");
+        generateSalaryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack1ActionPerformed(evt);
+                generateSalaryBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 640, 215, -1));
+        jPanel1.add(generateSalaryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 370, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 880, 20));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,18 +133,26 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 162, 840, 450));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel12.setText("Salary Month -");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 180, 30));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 180, 30));
+
+        quitBtn.setText("Quit");
+        quitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(quitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 640, 160, -1));
+
+        month.setBackground(new java.awt.Color(173, 192, 234));
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "JulyA", "ugust", "September", "October", "November", "December" }));
+        month.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 170, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 680));
 
@@ -108,19 +161,19 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
+        new AdminOptionsFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+    private void generateSalaryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateSalaryBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBack1ActionPerformed
+    }//GEN-LAST:event_generateSalaryBtnActionPerformed
 
-    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+    private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTableMouseClicked
+        new LoginFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_quitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,12 +213,14 @@ public class ManageSalaryFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBack1;
-    private com.toedter.calendar.JDateChooser jDate;
+    private javax.swing.JButton generateSalaryBtn;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable;
+    private javax.swing.JComboBox<String> month;
+    private javax.swing.JButton quitBtn;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }

@@ -79,7 +79,7 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
-        btnBack2 = new javax.swing.JButton();
+        quitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,11 +126,6 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable);
         if (jTable.getColumnModel().getColumnCount() > 0) {
             jTable.getColumnModel().getColumn(0).setResizable(false);
@@ -143,13 +138,13 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 840, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 840, 10));
 
-        btnBack2.setText("Quit");
-        btnBack2.addActionListener(new java.awt.event.ActionListener() {
+        quitBtn.setText("Quit");
+        quitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack2ActionPerformed(evt);
+                quitBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 620, 160, -1));
+        jPanel1.add(quitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 620, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,19 +183,15 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
+        new EmployeeOptionsFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnBack2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack2ActionPerformed
+    private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBack2ActionPerformed
-
-    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTableMouseClicked
+        new LoginFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_quitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,12 +230,12 @@ public class UpdateEmployee1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBack2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable;
+    private javax.swing.JButton quitBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
