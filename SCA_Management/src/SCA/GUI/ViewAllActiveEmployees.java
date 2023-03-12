@@ -94,7 +94,7 @@ public class ViewAllActiveEmployees extends javax.swing.JFrame {
         });
         jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 140, -1));
 
-        updateBtn.setText("View Employee");
+        updateBtn.setText("View Employee Profile");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -167,11 +167,7 @@ public class ViewAllActiveEmployees extends javax.swing.JFrame {
         {
             String empId=(String)jTable.getValueAt(row,0).toString().trim();
             
-            try {
-                new UpdateEmployeeFrame2(empId).setVisible(true);
-            } catch (ParseException ex) {
-                Logger.getLogger(ViewAllActiveEmployees.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            new ViewActiveEmpProfile(empId).setVisible(true);
             this.dispose();
         }
         else

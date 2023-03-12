@@ -45,6 +45,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
     Employees emp= new Employees();
     private int picUpload=0;
     
+    //For Testing Frame Purpose
     public UpdateEmployeeFrame2() throws ParseException {
         initComponents();
         setLocationRelativeTo(null);

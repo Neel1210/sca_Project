@@ -291,4 +291,27 @@ public class EmployeesDao {
         return x != 0;
         
     }
+    
+    public static ArrayList<Employees> viewAllActivEmployeeses() throws SQLException
+    {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = conn.prepareStatement("Select * from employees where status='Active' order by emp_id ASC");
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Employees> empList = new ArrayList<>();
+        while(rs.next())
+        {
+            Employees emp = new Employees();
+            emp.setEmp_id(rs.getString(1));
+            emp.setName(rs.getString(2));
+            emp.setFather_name(rs.getString(3));
+            emp.setContact(rs.getString(4));
+            emp.setAge(rs.getInt(5));
+            emp.setGender(rs.getString(7));
+            emp.setMail_id(rs.getString(8));
+            emp.setStatus(rs.getString(14));
+            emp.setSalary(rs.getInt(16));
+            empList.add(emp);
+        }
+        return empList;
+    }
 }
