@@ -31,7 +31,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddEmployeeFrame
      */
-   private File file;
+   private File file1;
+   private File file2;
    
     private String gender=null;
     private Date joining_date,dDob;
@@ -345,7 +346,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
             emp.setStatus(status);
             emp.setPan_card(txtPancard.getText().trim());
             emp.setSalary(salary);
-            emp.setDocuments(file);
+            emp.setDocuments(file1);
+            emp.setPhoto(file2);
             emp.setDob(sdf.format(dDob));
             
             boolean ans = EmployeesDao.addEmplyee(emp);
@@ -378,9 +380,9 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         fileChooser.setDialogTitle("Select Your File");
         int result = fileChooser.showOpenDialog(null);
         if(result == JFileChooser.APPROVE_OPTION){
-            file = fileChooser.getSelectedFile();
+            file1 = fileChooser.getSelectedFile();
             //emp.setDocuments(file);
-            txtDocument.setText(file.getPath()); 
+            txtDocument.setText(file1.getPath()); 
         }
     }//GEN-LAST:event_btnDocumentActionPerformed
 
@@ -396,15 +398,16 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         if (result == chooser.APPROVE_OPTION)
         {
             try
-            {
-                file=chooser.getSelectedFile();
-                Image image = (new ImageIcon(file.toString())).getImage().getScaledInstance(130,160, 0);
+            {   
+                
+                file2=chooser.getSelectedFile();
+                Image image = (new ImageIcon(file2.toString())).getImage().getScaledInstance(130,160, 0);
                 Icon icon = new javax.swing.ImageIcon(image);
                 photoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 photoLbl.setIcon(icon);
                 if(emp==null)
                     emp=new Employees();
-                emp.setPhoto(new FileInputStream(file.toString()));
+                emp.setPhoto(file2);
                 picUpload=1;
             }
             //catch(FileNotFoundException ex)

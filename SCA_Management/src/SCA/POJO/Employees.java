@@ -22,11 +22,11 @@ public class Employees {
         this.dob = dob;
     }
 
-    public FileInputStream getPhoto() {
+    public File getPhoto() {
         return photo;
     }
 
-    public void setPhoto(FileInputStream photo) {
+    public void setPhoto(File photo) {
         this.photo = photo;
     }
     private String emp_id;
@@ -46,7 +46,7 @@ public class Employees {
     private String pan_card;
     private int salary;
     private File documents;
-    private FileInputStream photo=null;
+    private File photo=null;
     private String dob;
 
     public String getEmp_id() {

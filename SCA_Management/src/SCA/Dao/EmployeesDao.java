@@ -79,7 +79,10 @@ public class EmployeesDao {
         FileInputStream fin = new FileInputStream(emp.getDocuments().getPath());
         ps.setBlob(17, fin, (int)f.length());
         
-        ps.setBlob(18,emp.getPhoto());
+        
+        f=emp.getPhoto();
+        fin = new FileInputStream(emp.getPhoto().getPath());
+        ps.setBlob(18,fin, (int)f.length());
         
         String dob = emp.getDob();
         gen = sdf.parse(dob);
@@ -92,7 +95,7 @@ public class EmployeesDao {
    public static ArrayList<Employees> getDetails() throws SQLException
     {
         Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement("Select * from employees where status='Active'");
+        PreparedStatement ps = conn.prepareStatement("Select * from employees where status='Active' order by emp_id");
         ResultSet rs = ps.executeQuery();
         ArrayList<Employees> empList = new ArrayList<>();
         while(rs.next())
@@ -112,7 +115,7 @@ public class EmployeesDao {
         return empList;
     }
    
-   public static Employees getEmpDetailById(String empId) throws SQLException
+   public static Employees getEmpDetailById(String empId) throws SQLException, FileNotFoundException, IOException
     {
         Connection conn = DBConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("Select * from employees where emp_id=?");
@@ -133,13 +136,31 @@ public class EmployeesDao {
             emp.setAccount_no(rs.getString(10));
             emp.setIfsc_code(rs.getString(11));
             emp.setPin_code(rs.getString(12));
+            
             java.sql.Date sjd = rs.getDate(13);
             java.util.Date ujd = (java.util.Date)sjd;
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             emp.setJoining_date(sdf.format(ujd));
+            
             emp.setStatus(rs.getString(14));
             emp.setPan_card(rs.getString(15));
             emp.setSalary(rs.getInt(16));
+            
+             
+            //Image Writing Code
+            Blob b=rs.getBlob(18);
+            byte barr[]=b.getBytes(1,(int)b.length());
+            FileOutputStream fout=new FileOutputStream(System.getProperty("user.dir")+"/src/temp/"+rs.getString(1)+".png");  
+            fout.write(barr);
+            
+            File file=new File(System.getProperty("user.dir")+"/src/temp/"+rs.getString(1)+".png");
+            emp.setPhoto(file);
+            
+            sjd = rs.getDate(19);
+            ujd = (java.util.Date)sjd;
+            sdf = new SimpleDateFormat("dd-MM-yyyy");
+            emp.setDob(sdf.format(ujd));
+            
             return emp;
         }
         return null;
@@ -176,10 +197,10 @@ public class EmployeesDao {
         return url;
     }
     
-    public static boolean updateEmployee(Employees emp)throws SQLException, ParseException
+    public static boolean updateEmployee(Employees emp)throws SQLException, ParseException, FileNotFoundException
     {
         Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement("update employees set emp_name=? ,father_name=? ,contact=? ,age=? ,address=?,gender=?,email_id=?,bank_name=?,acc_no=?,ifsc_code=?,pin_code=?,joining_date=?,status=?,pan_card=?,salary=? where emp_id=?");
+        PreparedStatement ps = conn.prepareStatement("update employees set emp_name=? ,father_name=? ,contact=? ,age=? ,address=?,gender=?,email_id=?,bank_name=?,acc_no=?,ifsc_code=?,pin_code=?,joining_date=?,status=?,pan_card=?,salary=?,photo=?,dob=? where emp_id=?");
         ps.setString(1, emp.getName());
         ps.setString(2, emp.getFather_name());
         ps.setString(3,emp.getContact());
@@ -191,6 +212,8 @@ public class EmployeesDao {
         ps.setString(9,emp.getAccount_no());
         ps.setString(10, emp.getIfsc_code());
         ps.setString(11,emp.getPin_code());
+        
+        //For Joining Date
          String genDate = emp.getJoining_date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         java.util.Date gen = sdf.parse(genDate);
@@ -199,7 +222,19 @@ public class EmployeesDao {
         ps.setString(13, emp.getStatus());
         ps.setString(14, emp.getPan_card());
         ps.setDouble(15,emp.getSalary());
-        ps.setString(16, emp.getEmp_id());
+        
+        File f=emp.getPhoto();
+        FileInputStream fin = new FileInputStream(emp.getPhoto().getPath());
+        ps.setBlob(16,fin, (int)f.length());
+        
+        //For DOB
+        String genDOB = emp.getDob();
+        sdf = new SimpleDateFormat("dd-MM-yyyy");
+        gen = sdf.parse(genDate);
+        genD = new java.sql.Date(gen.getTime());
+        ps.setDate(17, genD);
+        
+        ps.setString(18, emp.getEmp_id());
         int x=ps.executeUpdate();
         return x != 0;
         
@@ -208,7 +243,9 @@ public class EmployeesDao {
     public static boolean updateEmployeeAll(Employees emp)throws SQLException, ParseException, FileNotFoundException
     {
         Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement("update employees set emp_name=? ,father_name=? ,contact=? ,age=? ,address=?,gender=?,email_id=?,bank_name=?,acc_no=?,ifsc_code=?,pin_code=?,joining_date=?,status=?,pan_card=?,salary=?,documents=? where emp_id=?");
+        PreparedStatement ps = conn.prepareStatement("update employees set emp_name=? ,father_name=? ,contact=? ,age=? "
+                + ",address=?,gender=?,email_id=?,bank_name=?,acc_no=?,ifsc_code=?,pin_code=?,joining_date=?"
+                + ",status=?,pan_card=?,salary=?,documents=?,photo=?,dob=? where emp_id=?");
         ps.setString(1, emp.getName());
         ps.setString(2, emp.getFather_name());
         ps.setString(3,emp.getContact());
@@ -220,18 +257,36 @@ public class EmployeesDao {
         ps.setString(9,emp.getAccount_no());
         ps.setString(10, emp.getIfsc_code());
         ps.setString(11,emp.getPin_code());
-         String genDate = emp.getJoining_date();
+        
+        String genDate = emp.getJoining_date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         java.util.Date gen = sdf.parse(genDate);
         java.sql.Date genD = new java.sql.Date(gen.getTime());
         ps.setDate(12, genD);
+        
         ps.setString(13, emp.getStatus());
         ps.setString(14, emp.getPan_card());
         ps.setDouble(15,emp.getSalary());
-        ps.setString(17, emp.getEmp_id());
+        
         File f=emp.getDocuments();
         FileInputStream fin = new FileInputStream(emp.getDocuments().getPath());
         ps.setBlob(16, fin, (int)f.length());
+        
+       
+        
+        f=emp.getPhoto();
+        fin = new FileInputStream(emp.getPhoto().getPath());
+        ps.setBlob(17,fin, (int)f.length());
+                
+        //For DOB
+        String genDOB = emp.getDob();
+        sdf = new SimpleDateFormat("dd-MM-yyyy");
+        gen = sdf.parse(genDate);
+        genD = new java.sql.Date(gen.getTime());
+        ps.setDate(18, genD);
+        
+        ps.setString(19, emp.getEmp_id());
+        
         int x=ps.executeUpdate();
         return x != 0;
         
