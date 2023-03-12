@@ -39,7 +39,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
    private int uplaodFlag=0;
     private String gender=null;
     private Date joining_date;
-    private Date d_o_b;
+    private Date birth_Date;
     private String status=null;
     private int salary;
     Employees emp= new Employees();
@@ -410,7 +410,7 @@ public class UpdateEmployeeFrame2 extends javax.swing.JFrame {
             emp.setSalary(salary);
             
             sdf = new SimpleDateFormat("dd-MM-yyyy");
-            emp.setDob(sdf.format(d_o_b));
+            emp.setDob(sdf.format(birth_Date));
             boolean ans;
             
             if(uplaodDoc.isSelected())
@@ -635,8 +635,8 @@ private boolean validateInputs()
     status = getStatus();
     gender = getGender();
     joining_date = jDate.getDate();
-    d_o_b = dob.getDate();
-    if(gender==null || status==null || joining_date==null || d_o_b==null)
+    birth_Date = dob.getDate();
+    if(gender==null || status==null || joining_date==null || birth_Date==null)
     {
         JOptionPane.showMessageDialog(this, "Please select Gener Or Status Or Date!!");
         return true;
@@ -651,7 +651,7 @@ private boolean validateInputs()
     if(txtName.getText().isEmpty()||txtFname.getText().isEmpty()||txtAge.getText().isEmpty()
             ||txtContact.getText().isEmpty()||txtAddres.getText().isEmpty()||txtMail.getText().isEmpty()
             ||txtBank.getText().isEmpty()||txtAccNo.getText().isEmpty()||txtIfsc.getText().isEmpty()
-            ||txtPinCode.getText().isEmpty()||joining_date==null||d_o_b==null||txtPancard.getText().isEmpty()
+            ||txtPinCode.getText().isEmpty()||joining_date==null||birth_Date==null||txtPancard.getText().isEmpty()
             ||txtSalary.getText().isEmpty())
         return true;
     salary = Integer.parseInt(txtSalary.getText().trim());

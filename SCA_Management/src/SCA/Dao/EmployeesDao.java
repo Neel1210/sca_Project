@@ -230,9 +230,9 @@ public class EmployeesDao {
         //For DOB
         String genDOB = emp.getDob();
         sdf = new SimpleDateFormat("dd-MM-yyyy");
-        gen = sdf.parse(genDate);
-        genD = new java.sql.Date(gen.getTime());
-        ps.setDate(17, genD);
+       java.util.Date birthDate = sdf.parse(genDOB);
+        java.sql.Date genBirth = new java.sql.Date(birthDate.getTime());
+        ps.setDate(17, genBirth);
         
         ps.setString(18, emp.getEmp_id());
         int x=ps.executeUpdate();
