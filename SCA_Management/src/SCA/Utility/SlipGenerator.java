@@ -24,10 +24,6 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author spsub
- */
 public class SlipGenerator {
 
     public static void generateSlip(Employees emp,String mon_yer)
