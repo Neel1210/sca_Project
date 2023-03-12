@@ -8,8 +8,14 @@ package SCA.GUI;
 import SCA.Dao.EmployeesDao;
 import SCA.DbUtil.DBConnection;
 import SCA.POJO.Employees;
+import java.awt.Image;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,11 +79,12 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         btnBack2 = new javax.swing.JButton();
+        photoLbl = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,7 +106,6 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 620, 390, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 840, 10));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,6 +130,11 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable);
         if (jTable.getColumnModel().getColumnCount() > 0) {
             jTable.getColumnModel().getColumn(0).setResizable(false);
@@ -133,8 +144,8 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
             jTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 840, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 840, 10));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 202, 840, 380));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 598, 840, -1));
 
         btnBack2.setText("Quit");
         btnBack2.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +154,11 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnBack2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 620, 160, -1));
+
+        photoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        photoLbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(photoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 130, 160));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 178, 830, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,6 +228,32 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBack2ActionPerformed
 
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // TODO add your handling code here:
+         int row=jTable.getSelectedRow();
+        if(row!=-1)
+        {
+            String empId=(String)jTable.getValueAt(row,0).toString().trim();
+            
+             try {
+                 Employees emp = EmployeesDao.getEmpDetailById(empId);
+                  Image image = (new ImageIcon(emp.getPhoto().toString())).getImage().getScaledInstance(130,160, 0);
+           Icon icon = new javax.swing.ImageIcon(image);
+           photoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+           photoLbl.setIcon(icon);
+             } catch (SQLException ex) {
+                 Logger.getLogger(RemoveEmployee1.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
+                 Logger.getLogger(RemoveEmployee1.class.getName()).log(Level.SEVERE, null, ex);
+             }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Please select any row","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }  
+    }//GEN-LAST:event_jTableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -253,9 +295,10 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
     private javax.swing.JButton btnBack2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable;
+    private javax.swing.JLabel photoLbl;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

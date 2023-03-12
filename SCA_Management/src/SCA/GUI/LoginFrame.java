@@ -113,6 +113,8 @@ public class LoginFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login Accepted", "Welcome " + username, JOptionPane.INFORMATION_MESSAGE);
                 UserProfile.setUsername(username);
                 UserProfile.setUserId(userId);
+                AdminOptionsFrame admin = new AdminOptionsFrame();
+                admin.setVisible(true);
                 this.dispose();
 
             } else {
