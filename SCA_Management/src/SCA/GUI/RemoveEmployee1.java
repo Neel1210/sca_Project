@@ -191,6 +191,7 @@ public class RemoveEmployee1 extends javax.swing.JFrame {
                     //model = (DefaultTableModel)jTable.getModel();
                     //comment
                     model.setRowCount(0);
+                    photoLbl.setIcon(null);
                     loadData();
                     return;
                 }

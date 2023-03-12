@@ -141,6 +141,11 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
         });
 
         btnback.setText("Back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
 
         jPanel1.setMinimumSize(new java.awt.Dimension(940, 600));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
@@ -426,6 +431,13 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
             System.out.println("Cancel was selected");
         }
     }//GEN-LAST:event_photoBtnActionPerformed
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        // TODO add your handling code here:
+        AdminOptionsFrame admin = new AdminOptionsFrame();
+        admin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnbackActionPerformed
 
     /**
      * @param args the command line arguments
